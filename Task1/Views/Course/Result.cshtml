@@ -1,0 +1,28 @@
+﻿@model List<CourseWithTraineeResult>
+
+@{
+    ViewData["Title"] = "Result";
+}
+
+<h1>Result</h1>
+<h2>@Model.FirstOrDefault()?.CourseName</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Trainee Name</th>
+            <th>Degree</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr >
+                <td>@item.TraineeName</td>
+                <td>@item.Degree</td>
+                <td>@item.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>

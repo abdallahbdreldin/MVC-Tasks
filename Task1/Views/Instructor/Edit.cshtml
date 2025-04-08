@@ -1,0 +1,24 @@
+﻿@model Instructor
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<form action="/Instructor/EditSave/@Model.Id" method="post">
+    <label>Name</label>
+    <input name="Name" id="Name" value="@Model?.Name" class="form form-control" />
+    <label>Image Url</label>
+    <input name="ImageUrl" id="ImageUrl" value="@Model?.ImageUrl" class="form form-control" />
+    <label>Salary</label>
+    <input type="number" name="Salary" id="Salary" value="@Model?.Salary" class="form form-control" />
+    <label>Address</label>
+    <input name="Address" id="Address" value="@Model?.Address" class="form form-control" />
+    <label>Department Id</label>
+    <input name="Dept_Id" id="Dept_Id" value="@Model?.Dept_Id" class="form form-control" />
+    <label>Course Id</label>
+    <input name="Crs_Id" id="Crs_Id" value="@Model?.Crs_Id" class="form form-control" />
+
+    <input type="submit" value="Edit" class="btn btn-primary" />
+</form>
+

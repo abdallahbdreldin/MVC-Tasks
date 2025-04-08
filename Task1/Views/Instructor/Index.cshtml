@@ -1,0 +1,40 @@
+﻿@model List<Instructor>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<a href="/Instructor/Add">ADD</a>
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Salary</th>
+        <th>Department Name</th>
+        <th>Course Name</th>
+        <th>image</th>
+    </tr>
+    @if(Model != null){
+        foreach(Instructor item in Model){
+            <tr>
+               <td>@item.Id</td>
+               <td>@item.Name</td>
+               <td>@item.Address</td>
+               <td>@item.Salary</td>
+               <td>@item.Department.Name</td>
+               <td>@item.Course.Name</td>
+               <td><img src="/images/@item.ImageUrl" alt="Alternate Text" style="width:50px"/></td>
+               <td>
+                    <a href="/Instructor/Details/@item.Id">Details</a>
+               </td>
+                <td>
+                    <a href="/Instructor/Edit/@item.Id">Edit</a>
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+
+

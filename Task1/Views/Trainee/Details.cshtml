@@ -1,0 +1,17 @@
+﻿@model TraineeCourseWithResultViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+@{
+    var cssClass = Model.Status == "Passed" ? "text-bg-success" : "text-bg-danger";
+}
+
+<h2 class="@cssClass">@Model.TraineeName</h2>
+<h2 class="@cssClass">@Model.CourseName</h2>
+<h2 class="@cssClass">@Model.Degree</h2>
+<h2 class="@cssClass">@Model.Status</h2>
+
+

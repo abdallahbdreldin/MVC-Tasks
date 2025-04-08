@@ -1,0 +1,16 @@
+﻿@model Instructor
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Instructor Details</h1>
+<h2>@Model.Id</h2>
+<h2>@Model.Name</h2>
+<h3>@Model.Salary</h3>
+<h3>@Model.Address</h3>
+<h3>@Model.Department.Name</h3>
+<h3>@Model.Course.Name</h3>
+<img src="/images/@Model.ImageUrl" alt="Alternate Text" />
+<a href="/Instructor/Index">Back To List</a>
+
+
