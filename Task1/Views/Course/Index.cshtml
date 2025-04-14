@@ -1,0 +1,34 @@
+﻿@model List<Course>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<a asp-action="Add" asp-controller="Course">Add</a>
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Degree</th>
+        <th>Minimum Degree</th>
+        <th>Department Name</th>
+        <th>Hours</th>
+    </tr>
+    @if(Model != null)
+    {
+        foreach(var course in Model)
+        {
+            <tr>
+                <td>@course.Id</td>
+                <td>@course.Name</td>
+                <td>@course.Degree</td>
+                <td>@course.MinDegree</td>
+                <td>@course.Department.Name</td>
+                <td>@course.Hours</td>
+            </tr>
+        }
+    }
+</table>
+
