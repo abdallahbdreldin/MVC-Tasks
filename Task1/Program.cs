@@ -1,7 +1,20 @@
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using Task1.Models;
+using Task1.Repos;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<CompanyContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("dbconnection")
+    ));
+
+builder.Services.AddScoped<ICourseRepo, CourseRepo>();
+builder.Services.AddScoped<ITraineeRepo, TraineeRepo>();
+builder.Services.AddScoped<IDepartmentRepo, DepartmentRepo>();
 
 var app = builder.Build();
 

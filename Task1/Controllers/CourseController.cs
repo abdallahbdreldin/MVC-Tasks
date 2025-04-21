@@ -59,19 +59,26 @@ namespace Task1.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult NewSave(CourseWithDeptListViewModel coursevm)
         {
-            if(coursevm.Name != null)
+            if (ModelState.IsValid)
             {
-                Course coursedb = new()
+                try
                 {
-                    Name = coursevm.Name,
-                    Degree = coursevm.Degree,
-                    MinDegree = coursevm.MinDegree,
-                    Hours = coursevm.Hours,
-                    Dept_Id = coursevm.DeptId
-                };
-                _context.Courses.Add(coursedb);
-                _context.SaveChanges();
-                return RedirectToAction("Index");
+                    Course coursedb = new()
+                    {
+                        Name = coursevm.Name,
+                        Degree = coursevm.Degree,
+                        MinDegree = coursevm.MinDegree,
+                        Hours = coursevm.Hours,
+                        Dept_Id = coursevm.DeptId
+                    };
+                    _context.Courses.Add(coursedb);
+                    _context.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch(Exception ex) 
+                {
+                    ModelState.AddModelError("other",ex.InnerException.Message);
+                }
             }
             coursevm.Departments = _context.Departments.ToList();
             return View("Add",coursevm);

@@ -7,19 +7,38 @@
 <h1>Add</h1>
 
 <form asp-action="NewSave" asp-controller="Course" method="post">
-    <label asp-for="Name"></label>
-    <input class="form form-control" asp-for="Name" />
-    <label asp-for="Degree"></label>
-    <input class="form form-control" asp-for="Degree" />
-    <label asp-for="MinDegree"></label>
-    <input class="form form-control" asp-for="MinDegree" />
-    <label asp-for="Hours"></label>
-    <input class="form form-control" asp-for="Hours" />
-    <label asp-for="DeptId"></label>
-    <select class="form form-control" asp-for="DeptId" asp-items="options">
-        <option value="0">-- Select Department --</option>
-    </select>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div>
+        <label asp-for="Name"></label>
+        <input class="form form-control" asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Degree"></label>
+        <input class="form form-control" asp-for="Degree" />
+        <span asp-validation-for="Degree" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="MinDegree"></label>
+        <input class="form form-control" asp-for="MinDegree" />
+        <span asp-validation-for="MinDegree" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Hours"></label>
+        <input class="form form-control" asp-for="Hours" />
+        <span asp-validation-for="Hours" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="DeptId"></label>
+        <select class="form form-control" asp-for="DeptId" asp-items="options">
+            <option value="0">-- Select Department --</option>
+        </select>
+        <span asp-validation-for="DeptId" class="text-danger"></span>
+    </div>
     <button class="btn btn-primary" type="submit">Save</button>
 </form>
 
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
