@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Task1.Models
 {
-    public class CompanyContext : DbContext
+    public class CompanyContext : IdentityDbContext<ApplicationUser>
     {
         public CompanyContext() : base()
         {
@@ -22,6 +23,8 @@ namespace Task1.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<CrsResult>()
                 .HasKey(c => new { c.Crs_Id, c.Trainee_Id });
 

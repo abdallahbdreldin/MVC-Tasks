@@ -1,12 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Task1.Models;
+using Task1.Repos;
 
 namespace Task1.Controllers
 {
     public class InstructorController : Controller
     {
-        CompanyContext _context = new CompanyContext();
+        private readonly CompanyContext _context;
+        private readonly IInstructorRepo _repo;
+
+        public InstructorController(CompanyContext context , IInstructorRepo repo)
+        {
+            _context = context;
+            _repo = repo;
+        }
+
+        [Authorize]
         public IActionResult Index()
         {
             var instructors = _context.Instructors
@@ -16,6 +27,7 @@ namespace Task1.Controllers
                                 .ToList();
             return View(instructors);
         }
+
 
         public IActionResult Details(int id)
         {
@@ -34,13 +46,13 @@ namespace Task1.Controllers
         [HttpPost]
         public IActionResult NewSave(Instructor ins)
         {
-            if(ins.Name != null)
+            if (ins.Name != null)
             {
                 _context.Instructors.Add(ins);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View("Add",ins);
+            return View("Add", ins);
         }
 
         public IActionResult Edit(int id)
@@ -52,7 +64,7 @@ namespace Task1.Controllers
         [HttpPost]
         public IActionResult EditSave(Instructor ins)
         {
-            if(ins.Name != null)
+            if (ins.Name != null)
             {
                 Instructor insDb = _context.Instructors.Find(ins.Id);
 
@@ -67,6 +79,17 @@ namespace Task1.Controllers
                 return RedirectToAction("Index");
             }
             return View("Edit", ins);
+        }
+
+        public IActionResult GetInsCard(int id)
+        {
+            Instructor ins = _repo.GetById(id);
+            if (ins == null)
+            {
+                return NotFound();
+            }
+
+            return PartialView("_InsCardPartial",ins);
         }
     }
 }

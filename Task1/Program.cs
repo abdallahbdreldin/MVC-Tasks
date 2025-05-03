@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Task1.Models;
@@ -12,6 +13,10 @@ builder.Services.AddDbContext<CompanyContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("dbconnection")
     ));
 
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+   .AddEntityFrameworkStores<CompanyContext>();
+
+builder.Services.AddScoped<IInstructorRepo, InstructorRepo>();
 builder.Services.AddScoped<ICourseRepo, CourseRepo>();
 builder.Services.AddScoped<ITraineeRepo, TraineeRepo>();
 builder.Services.AddScoped<IDepartmentRepo, DepartmentRepo>();

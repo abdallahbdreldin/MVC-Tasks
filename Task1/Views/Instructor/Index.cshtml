@@ -5,6 +5,8 @@
 
 <a href="/Instructor/Add">ADD</a>
 
+<div id="div1" style="border:5px solid red"></div>
+
 <table class="table table-bordered table-hover">
     <tr>
         <th>Id</th>
@@ -24,10 +26,14 @@
                <td>@item.Salary</td>
                <td>@item.Department.Name</td>
                <td>@item.Course.Name</td>
-               <td><img src="/images/@item.ImageUrl" alt="Alternate Text" style="width:50px"/></td>
+               @* <td><img src="/images/@item.ImageUrl" alt="Alternate Text" style="width:50px"/></td> *@
                <td>
                     <a href="/Instructor/Details/@item.Id">Details</a>
                </td>
+                <td>
+                    @* <a href="/Instructor/GetInsCard/@item.Id">Partial Details</a> *@
+                    <input type="button" class="btn btn-success" value="Partial Detials" onclick="LoadCard(@item.Id)"/>
+                </td>
                 <td>
                     <a href="/Instructor/Edit/@item.Id">Edit</a>
                 </td>
@@ -35,6 +41,17 @@
         }
     }
 </table>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    function LoadCard(id) {
+        $.ajax({
+            url: `/Instructor/GetInsCard/${id}`,
+            success: function (result) {
+                $("#div1").html(result);
+            }
+        });
+    }
+</script>
 
 
 
